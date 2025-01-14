@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  namespace: homework
+data:
+  default.conf: |
+    server {
+          listen 8000;
+          server_name  _;
+          location / {
+              root   /homework;
+              index  index.html;
+            }
+    }
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web
+  namespace: homework
+  labels:
+    app: web
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.27.3
+    ports:
+    - containerPort: 8000
+    env:
+    - name: NGINX_PORT
+      value: "8000"
+    volumeMounts:
+    - name: empty-volume
+      mountPath: /homework
+#    - name: nginx-config
+#      mountPath: /etc/nginx/conf.d
+    lifecycle:
+      postStart:
+        exec:
+          command: ["/bin/sh","-c","sed -i 's/listen       80;/listen       8000;/g' /etc/nginx/conf.d/default.conf; sed -i 's/listen  \\[\\:\\:\\]\\:80;/listen  [::]:8000;/g' /etc/nginx/conf.d/default.conf;rm -r /usr/share/nginx/html;ln -s /homework /usr/share/nginx/html;service nginx reload"]
+      preStop:
+        exec:
+          command: ["/bin/sh","-c","rm /homework/index.html"]
+  initContainers:
+  - name: get-otus
+    image: curlimages/curl
+    command: ['sh', '-c', "curl -k https://otus.ru >> /init/index.html"]
+    volumeMounts:
+    - name: empty-volume
+      mountPath: /init
+  volumes:
+  - name: empty-volume
+    emptyDir: {}
+  - name: nginx-config
+    configMap:
+      name: nginx-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  namespace: homework
+spec:
+  ports:
+  - port: 8000
+    targetPort: 8000
+    protocol: TCP
+  selector:
+    app: web
+  type: NodePort
