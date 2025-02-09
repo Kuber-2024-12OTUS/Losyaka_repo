@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.name }}-deploy
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.deployment.label }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.deployment.container.label }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.deployment.container.label }}
+    spec:
+      serviceAccountName: {{ .Values.app.name }}-sa
+      containers:
+      - name: {{ .Values.app.name }}-nginx
+        image: {{ .Values.deployment.container.image.name }}:{{ .Values.deployment.container.image.tag }}
+        ports:
+        - containerPort: {{ .Values.deployment.container.port }}
+        volumeMounts:
+        - name: web-pvc
+          mountPath: /homework
+        - name: nginx-config
+          mountPath: /etc/nginx/conf.d
+        - name: random
+          mountPath: /homework/conf/
+        lifecycle:
+          preStop:
+            exec:
+              command: ["/bin/sh","-c","rm /homework/index.html"]
+        {{- if .Values.deployment.container.readinessProbe.enabled }}
+        readinessProbe:
+          httpGet:
+            scheme: HTTP
+            path: /index.html
+            port: {{ .Values.deployment.container.port }}
+        {{- end }}
+      initContainers:
+      - name: {{ .Values.app.name }}-init
+        image: {{ .Values.deployment.initContainer.image.name }}:{{ .Values.deployment.initContainer.image.tag }}
+        command: ['sh', '-c', "curl -k https://otus.ru >> /init/index.html; curl -k -h \"Authorization: Bearer $MONITORING_TOKEN\" https://kubernetes.default.svc.cluster.local/metrics >> /init/metrics.html"]
+        volumeMounts:
+        - name: web-pvc
+          mountPath: /init
+          readOnly: false
+        env:
+        - name: MONITORING_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.app.name }}-sa-token
+              key: token
+      volumes:
+      - name: web-pvc
+        {{- if .Values.deployment.pvc.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ .Values.deployment.pvc.name }}
+        {{- else }}
+        emptyDir: {}
+        {{- end }}
+      - name: nginx-config
+        configMap:
+          name: {{ .Values.app.name }}-cm
+          items:
+          - key: default.conf
+            path: default.conf
+      - name: random
+        configMap:
+          name: {{ .Values.app.name }}-cm
+          items:
+          - key: test
+            path: file
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1

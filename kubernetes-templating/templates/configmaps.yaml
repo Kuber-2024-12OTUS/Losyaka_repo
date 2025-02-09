@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.app.name }}-cm
+  namespace: {{ .Values.namespace }}
+data:
+  test: "true"
+  default.conf: |
+    server {
+          listen {{ .Values.deployment.container.port }};
+          server_name  _;
+          location / {
+              root   /homework;
+              index  index.html;
+            }
+    }
+    

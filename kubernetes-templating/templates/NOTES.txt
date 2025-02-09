@@ -1,0 +1,5 @@
+Чарт успешно установлен
+Доступ к проекту по адресу:
+http://{{ .Values.ingress.hostname }}
+
+Если используете minikube, не забудьте "minikube tunnel", а так же добавить {{ .Values.ingress.hostname }} в файл hosts

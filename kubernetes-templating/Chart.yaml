@@ -1,0 +1,10 @@
+apiVersion: v3
+name: web-chart
+description: HelmChart with otus copy
+version: 0.0.1
+appVersion: "1.0.0"
+dependencies:
+  - name: mysql
+    version: "1.6.9"
+    repository: "https://helm.wso2.com"
+    condition: mysql.enabled

@@ -1,0 +1,29 @@
+app:
+  name: web
+
+namespace: homework
+
+deployment:
+  label: web
+  replicas: 3
+  container:
+    image: 
+      name: nginx
+      tag: "1.27.3"
+    label: web
+    readinessProbe:
+      enabled: true
+    port: 8000
+  initContainer:
+    image:
+      name: curlimages/curl
+      tag: latest
+  pvc:
+    enabled: false
+    name: ""
+
+service:
+  port: 8000
+
+ingress:
+  hostname: homework.otus
