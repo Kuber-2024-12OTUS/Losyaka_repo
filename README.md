@@ -1,11 +1,26 @@
 
-![hw1](https://github.com/user-attachments/assets/b67eb5cc-55ff-44c6-9c25-d7a50986a283)
-![hw2](https://github.com/user-attachments/assets/a692ccc8-44bf-4a94-92e6-8992a6df0c46)
+helm install prometheus oci://registry-1.docker.io/bitnamicharts/kube-prometheus -f .\prometheus-values.yaml -n mon --create-namespace
+
+kubectl apply -f namespace.yaml
+
+kubectl apply -f cm.yaml
+
+kubectl apply -f deployment.yaml
+
+kubectl apply -f service.yaml
+
+kubectl apply -f servicemonitor.yaml
+
+kubectl apply -f ingress.yaml
+
+minikube tunnel
 
 
+![hw8-1](https://github.com/user-attachments/assets/93e0a53c-36b8-4a51-a74c-f482b34300c9)
 
-helm install kafka-prod oci://registry-1.docker.io/bitnamicharts/kafka -n prod --create-namespace -f .\kafka-myval.yaml
+![hw8-2](https://github.com/user-attachments/assets/4e24ffd0-34dc-425f-9d6c-853f50b497c6)
 
-helm install kafka-prod oci://registry-1.docker.io/bitnamicharts/kafka -n dev --create-namespace -f .\kafka-myval2.yaml
+![hw8-3](https://github.com/user-attachments/assets/e53467be-7d28-4634-8273-0d9406f0f805)
 
-![hw3](https://github.com/user-attachments/assets/7b2ee984-b8cc-473c-88cf-db44b589593c)
+![hw8-4](https://github.com/user-attachments/assets/d4a31215-6f6d-48bf-a8ee-0b015ed74803)
+
