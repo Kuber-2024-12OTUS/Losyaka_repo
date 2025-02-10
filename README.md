@@ -7,4 +7,5 @@
 helm install kafka-prod oci://registry-1.docker.io/bitnamicharts/kafka -n prod --create-namespace -f .\kafka-myval.yaml
 
 helm install kafka-prod oci://registry-1.docker.io/bitnamicharts/kafka -n dev --create-namespace -f .\kafka-myval2.yaml
-![hw3](https://github.com/user-attachments/assets/468b2789-d526-4b42-b772-b3ed2d456173)
+
+![hw3](https://github.com/user-attachments/assets/7b2ee984-b8cc-473c-88cf-db44b589593c)
