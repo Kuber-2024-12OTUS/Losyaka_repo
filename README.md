@@ -1,12 +1,20 @@
 
 helm install prometheus oci://registry-1.docker.io/bitnamicharts/kube-prometheus -f .\prometheus-values.yaml -n mon --create-namespace
+
 kubectl apply -f namespace.yaml
+
 kubectl apply -f cm.yaml
+
 kubectl apply -f deployment.yaml
+
 kubectl apply -f service.yaml
+
 kubectl apply -f servicemonitor.yaml
+
 kubectl apply -f ingress.yaml
+
 minikube tunnel
+
 
 ![hw8-1](https://github.com/user-attachments/assets/93e0a53c-36b8-4a51-a74c-f482b34300c9)
 
