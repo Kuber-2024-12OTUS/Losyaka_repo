@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.app.name }}-deploy
+  name: {{ .Release.Name }}-{{ .Values.app.name }}-deploy
   namespace: {{ .Values.namespace }}
   labels:
     app: {{ .Values.deployment.label }}
@@ -15,9 +15,9 @@ spec:
       labels:
         app: {{ .Values.deployment.container.label }}
     spec:
-      serviceAccountName: {{ .Values.app.name }}-sa
+      serviceAccountName: {{ .Release.Name }}-{{ .Values.app.name }}-sa
       containers:
-      - name: {{ .Values.app.name }}-nginx
+      - name: {{ .Release.Name }}-{{ .Values.app.name }}-nginx
         image: {{ .Values.deployment.container.image.name }}:{{ .Values.deployment.container.image.tag }}
         ports:
         - containerPort: {{ .Values.deployment.container.port }}
@@ -40,7 +40,7 @@ spec:
             port: {{ .Values.deployment.container.port }}
         {{- end }}
       initContainers:
-      - name: {{ .Values.app.name }}-init
+      - name: {{ .Release.Name }}-{{ .Values.app.name }}-init
         image: {{ .Values.deployment.initContainer.image.name }}:{{ .Values.deployment.initContainer.image.tag }}
         command: ['sh', '-c', "curl -k https://otus.ru >> /init/index.html; curl -k -h \"Authorization: Bearer $MONITORING_TOKEN\" https://kubernetes.default.svc.cluster.local/metrics >> /init/metrics.html"]
         volumeMounts:
@@ -51,7 +51,7 @@ spec:
         - name: MONITORING_TOKEN
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.app.name }}-sa-token
+              name: {{ .Release.Name }}-{{ .Values.app.name }}-sa-token
               key: token
       volumes:
       - name: web-pvc
@@ -63,13 +63,13 @@ spec:
         {{- end }}
       - name: nginx-config
         configMap:
-          name: {{ .Values.app.name }}-cm
+          name: {{ .Release.Name }}-{{ .Values.app.name }}-cm
           items:
           - key: default.conf
             path: default.conf
       - name: random
         configMap:
-          name: {{ .Values.app.name }}-cm
+          name: {{ .Release.Name }}-{{ .Values.app.name }}-cm
           items:
           - key: test
             path: file
