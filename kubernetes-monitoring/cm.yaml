@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config
+  namespace: homework
+data:
+  default.conf: |
+    server {
+          listen 8000;
+          server_name  _;
+          location = /metrics {
+            stub_status;
+          }
+          location / {
+              root   /homework;
+              index  index.html;
+            }
+
+    }
+    
