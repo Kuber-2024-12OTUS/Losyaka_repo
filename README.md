@@ -7,10 +7,15 @@
 ![hw9-1](https://github.com/user-attachments/assets/1f844c48-d6ff-48ec-aa7c-b08b4ffab60b)
 
 Добавлен рпозиторий и скачаны default values
+
 helm repo add grafana https://grafana.github.io/helm-charts
+
 helm show values grafana/loki > loki-values.yaml
+
 helm show values grafana/promtail > promtail-values.yaml
+
 helm show values grafana/grafana > grafana-values.yaml
+
 
 Values приведены к нужному виду, расположены в репозитории
 
