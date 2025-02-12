@@ -40,3 +40,8 @@ helm install grafana grafana/grafana -f .\grafana-values.yaml -n loki --create-n
 ![hw9-5](https://github.com/user-attachments/assets/1dc64725-58a2-4c58-9fd5-5cb5c02617b4)
 
 ![hw9-6](https://github.com/user-attachments/assets/7d688fb4-78fd-440b-aff1-f1befd944aa8)
+
+Проверка, что логи кладутся в s3
+
+![hw9-7](https://github.com/user-attachments/assets/33088f7d-d2be-4b85-aa63-a1ec45dd4f96)
+
