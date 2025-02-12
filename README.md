@@ -20,6 +20,7 @@ helm show values grafana/grafana > grafana-values.yaml
 Values приведены к нужному виду, расположены в репозитории
 
 Установлены loki, promtail, grafana
+
 helm install loki grafana/loki -f .\loki-values.yaml -n loki --create-namespace
 ![hw9-2](https://github.com/user-attachments/assets/b8c35930-9fb8-4868-90d9-76ed16249267)
 
