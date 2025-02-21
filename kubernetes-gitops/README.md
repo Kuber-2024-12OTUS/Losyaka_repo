@@ -42,6 +42,6 @@ kubectl get all -n homework
 
 kubectl apply -f .\argocd-app-helm.yaml
 
-get all -n homeworkhelm
+kubectl get all -n homeworkhelm
 
 ![hw10-3](https://github.com/user-attachments/assets/15fedcca-bf44-4c65-8d3e-91b14fcb87ca)
