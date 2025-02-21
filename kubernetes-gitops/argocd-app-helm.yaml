@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubernetes-templating
+  namespace: argo
+spec:
+  project: otus
+  source:
+    #chart: kubernetes-templating
+    repoURL: https://github.com/Kuber-2024-12OTUS/Losyaka_repo.git
+    targetRevision: HEAD
+    path: kubernetes-templating
+    helm:
+      releaseName: otus-hw
+      valuesObject:
+        deployment:
+          replicas: 4
+        namespace: homeworkhelm
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: homeworkhelm
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
