@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubernetes-networks
+  namespace: argo
+spec:
+  destination:
+    namespace: homework
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+  project: otus
+  source:
+    path: kubernetes-networks
+    repoURL: https://github.com/Kuber-2024-12OTUS/Losyaka_repo.git
+    targetRevision: HEAD
+
+operation:
+  sync:
+    syncStrategy:
+      apply: {}
