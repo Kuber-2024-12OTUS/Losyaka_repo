@@ -1,0 +1,9 @@
+root@web-deployment-547bf749b7-m6dt7:/# ps aux
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.0  10812  6192 ?        Ss   05:56   0:00 nginx: master process nginx -g daemon off;
+101            7  0.0  0.0  11204  3220 ?        S    05:56   0:00 nginx: worker process
+root         577  0.0  0.0   4588  4032 pts/0    Ss   08:08   0:00 /bin/bash
+root         747  0.0  0.0   7888  3924 pts/0    R+   08:09   0:00 ps aux
+root@web-deployment-547bf749b7-m6dt7:/# strace -p 1
+strace: Process 1 attached
+rt_sigsuspend([], 8

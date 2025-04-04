@@ -1,0 +1,11 @@
+/host/var/log/pods/homework_web-deployment-547bf749b7-m6dt7_30235e34-9ae1-462c-8b8a-28b750dbe478/nginx # tail host/var/lib/docker/containers/18cead6f06e66a13a74ba2753fc244cf0b25a8d9f56db0f8d6e8c2b22ef71efb/18cead6f06e66a13a74ba2753fc244cf0b25a8d9f56db0f8d6e8c2b22ef71efb-json.log
+{"log":"10.244.0.1 - - [04/Apr/2025:16:01:50 +0800] \"GET /index.html HTTP/1.1\" 200 667904 \"-\" \"kube-probe/1.31\" \"-\"\n","stream":"stdout","time":"2025-04-04T08:01:50.71090295Z"}
+{"log":"10.244.0.1 - - [04/Apr/2025:16:02:00 +0800] \"GET /index.html HTTP/1.1\" 200 476768 \"-\" \"kube-probe/1.31\" \"-\"\n","stream":"stdout","time":"2025-04-04T08:02:00.708999717Z"}
+{"log":"10.244.0.1 - - [04/Apr/2025:16:02:10 +0800] \"GET /index.html HTTP/1.1\" 200 667904 \"-\" \"kube-probe/1.31\" \"-\"\n","stream":"stdout","time":"2025-04-04T08:02:10.708106358Z"}
+{"log":"10.244.0.1 - - [04/Apr/2025:16:02:20 +0800] \"GET /index.html HTTP/1.1\" 200 444000 \"-\" \"kube-probe/1.31\" \"-\"\n","stream":"stdout","time":"2025-04-04T08:02:20.70827444Z"}
+{"log":"10.244.0.1 - - [04/Apr/2025:16:02:30 +0800] \"GET /index.html HTTP/1.1\" 200 636048 \"-\" \"kube-probe/1.31\" \"-\"\n","stream":"stdout","time":"2025-04-04T08:02:30.707979653Z"}
+{"log":"10.244.0.1 - - [04/Apr/2025:16:02:40 +0800] \"GET /index.html HTTP/1.1\" 200 667904 \"-\" \"kube-probe/1.31\" \"-\"\n","stream":"stdout","time":"2025-04-04T08:02:40.711754666Z"}
+{"log":"10.244.0.1 - - [04/Apr/2025:16:02:50 +0800] \"GET /index.html HTTP/1.1\" 200 503808 \"-\" \"kube-probe/1.31\" \"-\"\n","stream":"stdout","time":"2025-04-04T08:02:50.71136656Z"}
+{"log":"10.244.0.1 - - [04/Apr/2025:16:03:00 +0800] \"GET /index.html HTTP/1.1\" 200 479232 \"-\" \"kube-probe/1.31\" \"-\"\n","stream":"stdout","time":"2025-04-04T08:03:00.712347444Z"}
+{"log":"10.244.0.1 - - [04/Apr/2025:16:03:10 +0800] \"GET /index.html HTTP/1.1\" 200 581888 \"-\" \"kube-probe/1.31\" \"-\"\n","stream":"stdout","time":"2025-04-04T08:03:10.708563831Z"}
+{"log":"10.244.0.1 - - [04/Apr/2025:16:03:20 +0800] \"GET /index.html HTTP/1.1\" 200 667904 \"-\" \"kube-probe/1.31\" \"-\"\n","stream":"stdout","time":"2025-04-04T08:03:20.707499121Z"}
