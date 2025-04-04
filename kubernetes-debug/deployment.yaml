@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deployment
+  namespace: homework
+  labels:
+    app: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - name: nginx
+        image: kyos0109/nginx-distroless
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: empty-volume
+          mountPath: /usr/share/nginx/html
+        lifecycle:
+          preStop:
+            exec:
+              command: ["/bin/sh","-c","rm /homework/index.html"]
+        readinessProbe:
+          httpGet:
+            scheme: HTTP
+            path: /index.html
+            port: 80
+      initContainers:
+      - name: get-otus
+        image: curlimages/curl
+        command: ['sh', '-c', "curl -k https://otus.ru >> /init/index.html"]
+        volumeMounts:
+        - name: empty-volume
+          mountPath: /init
+      volumes:
+      - name: empty-volume
+        emptyDir: {}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
